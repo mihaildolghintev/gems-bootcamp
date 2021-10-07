@@ -1,31 +1,38 @@
 %nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
   .container-fluid
-    %a.navbar-brand{:href => "#"} Rubygems
-    %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarSupportedContent", "data-bs-toggle" => "collapse", :type => "button"}
-      %span.navbar-toggler-icon
-    #navbarSupportedContent.collapse.navbar-collapse
-      - if current_user
-        %ul.navbar-nav.me-auto.mb-2.mb-lg-0
-          %li.nav-item
-            = link_to root_path, class: "nav-link #{'active' if current_page?(root_path)}" do
-              .fa.fa-home
-              Home
-          %li.nav-item
-            = link_to courses_path, class: "nav-link #{'active' if current_page?(courses_path)}" do
-              .fa.fa-book
-              Courses
+    = link_to 'Rubygems', root_path, class: 'navbar-brand'
+    %button.navbar-toggler{ 'aria-controls' => 'navbarSupportedContent', 'aria-expanded' => 'false', 'aria-label' => 'Toggle navigation', 'data-bs-target' => '#navbarSupportedContent', 'data-bs-toggle' => 'collapse', :type => 'button' }
+      %span.navbar-toggler-icon.collapse.navbar-collapse#navbar-supported-content
+    - if current_user
+      %ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        %li.nav-item
+          = link_to root_path, class: "nav-link #{'active' if current_page?(root_path)}" do
+            .fa.fa-home
+            Home
+        %li.nav-item
+          = link_to courses_path, class: "nav-link #{'active' if current_page?(courses_path)}" do
+            .fa.fa-book
+            Courses
+        %li.nav-item
+          = link_to new_course_path, class: "nav-link #{'active' if current_page?(new_course_path)}" do
+            .fa.fa-plus
+            New Course
+      %form.d-flex
+        = form_tag(courses_path, method: :get) do
+          = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: 'Search', class: 'form-control me-2'
+        %ul.navbar-nav
           %li.nav-item.dropdown
-            %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
+            %a.nav-link.dropdown-toggle#navbar-dropdown{ 'aria-expanded' => 'false', 'data-bs-toggle' => 'dropdown', href: '#', role: 'button' }
               = current_user.email
-            %ul.dropdown-menu{"aria-labelledby" => "navbarDropdown"}
+            %ul.dropdown-menu{ 'aria-labelledby' => 'navbar-dropdown' }
               %li
-                %a.dropdown-item{:href => "#"} Action
+                %a.dropdown-item{ href: '#' } Action
                 = link_to 'Accout settings', edit_user_registration_path, class: 'dropdown-item'
               %li
                 = link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'dropdown-item'
-      - else
-        %ul.navbar-nav
-          %li.nav-item
-            = link_to 'Sign up', new_user_registration_path, class: 'nav-link'
-          %li.nav-item
-            = link_to 'Log in', new_user_session_path, class: 'nav-link'
+    - else
+      %ul.navbar-nav
+        %li.nav-item
+          = link_to 'Sign up', new_user_registration_path, class: 'nav-link'
+        %li.nav-item
+          = link_to 'Log in', new_user_session_path, class: 'nav-link'

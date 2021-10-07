@@ -1,15 +1,53 @@
+.card-group
+  .card.card-body
+    %h1
+      .fa.fa-graduation-cap
+    = Course.count
+    online courses
+    .row
+    Explore a variety of fresh topics
+
+  .card.card-body
+    %h1
+      .fa.fa-chalkboard-teacher
+      /.fa.fa-brain
+    = Course.distinct.count(:user_id)
+    expert instructors
+    .row
+    Find the right instructor for you
+
+  .card.card-body
+    %h1
+      .fa.fa-user-graduate
+    = User.count
+    active learners
+    .row
+    Join the knowledge sharing community
+
+  .card.card-body
+    %h1
+      .fa.fa-infinity
+    Lifetime access
+    .row
+    Learn on your schedule
+
 %h1
-  Hello world
-  %p Find me in app/view/home/index.html.erb
-
-.fa.fa-flag
-.fab.fa-amazon
-= link_to root_path do
-  .fa.fa-home
-
-
-= link_to courses_path, class: 'btn btn-success' do
-  .fa.fa-book
-  Courses
-
-
+  Popular courses
+.row.row-cols-1-row-cols-md-3.g-4
+  - @courses.each do |course|
+    .col-4
+      = render 'courses/course', course: course
+%hr
+%h1
+  Top rated courses
+.row.row-cols-1-row-cols-md-3.g-4
+  - @courses.each do |course|
+    .col-4
+      = render 'courses/course', course: course
+%hr
+%h1
+  Most recent courses
+.row.row-cols-1-row-cols-md-3.g-4
+  - @latest_courses.each do |course|
+    .col-4
+      = render 'courses/course', course: course

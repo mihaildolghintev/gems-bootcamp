@@ -1,10 +1,15 @@
-%h1 "Hello world
-%p Find me in app/views/home/index.html.erb
-= simple_form_for @course do |f|
-  = f.error_notification
-  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
-  = f.input :title
-  = f.label :description
-  = f.rich_text_area :description
-  /= f.submit 'Save'
-  = f.button :submit
+%h1
+  Hello world
+  %p Find me in app/view/home/index.html.erb
+
+.fa.fa-flag
+.fab.fa-amazon
+= link_to root_path do
+  .fa.fa-home
+
+
+= link_to courses_path, class: 'btn btn-success' do
+  .fa.fa-book
+  Courses
+
+

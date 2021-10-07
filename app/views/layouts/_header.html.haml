@@ -14,6 +14,10 @@
             .fa.fa-book
             Courses
         %li.nav-item
+          = link_to users_path, class: "nav-link #{'active' if current_page?(users_path)}" do
+            .fa.fa-user
+            Users
+        %li.nav-item
           = link_to new_course_path, class: "nav-link #{'active' if current_page?(new_course_path)}" do
             .fa.fa-plus
             New Course

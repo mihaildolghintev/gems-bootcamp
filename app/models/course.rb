@@ -1,7 +1,7 @@
 class Course < ApplicationRecord
   belongs_to :user
 
-  validates :title, presence: true
+  validates :title, :short_description, :language, :price, :level, presence: true
   validates :description, presence: true, length: { minimum: 5 }
 
   def to_s

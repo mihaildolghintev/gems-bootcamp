@@ -1,4 +1,19 @@
 class Course < ApplicationRecord
+  include PublicActivity::Model
+  # tracked
+  tracked owner: proc { |controller, _model| controller.current_user }
+
+  LANGUAGES = %w[English Russian Polish].freeze
+  LEVELS = %w[Beginner Intermediate Advanced].freeze
+  class << self
+    def languages
+      LANGUAGES.map { |language| [language, language] }
+    end
+
+    def levels
+      LEVELS.map { |level| [level, level] }
+    end
+  end
   belongs_to :user
 
   validates :title, :short_description, :language, :price, :level, presence: true

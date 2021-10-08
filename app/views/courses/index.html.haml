@@ -1,8 +1,29 @@
-%h1
-  Courses:
-  = @courses.count
+%h3
+  .text-center.m-3
+    Courses
+    .badge.bg-danger
+      = @courses.count
 
-.row.row-cols-1-row-cols-md-3.g-4
-  - @courses.each do |course|
-    .col-4
-      = render 'courses/course', course: course
+.row.gx-2
+  .col-2
+    = search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f|
+      = f.label :title
+      .mb-3= f.search_field :title_cont, placeholder: 'title', class: 'form-control'
+      = f.label :short_description
+      .mb-3= f.search_field :short_description_cont, placeholder: 'Short description', class: 'form-control'
+      = f.label :language
+      .mb-3= f.select :language_cont, Course.languages
+      = f.label :level
+      .mb-3= f.select :level_cont, Course.levels
+      = f.label :price
+      .mb-3= f.search_field :price_eq, placeholder: 'Price', class: 'form-control'
+      = f.label :email
+      .mb-3= f.search_field :user_email_cont, placeholder: 'User email', class: 'form-control'
+      = f.submit 'search', { class: 'btn btn-primary w-100 mb-2' }
+    = link_to courses_path, class: 'btn btn-secondary' do
+      .fa.fa-sync
+  .col-10
+    .row.row-cols-1-row-cols-md-3.g-4
+      - @courses.each do |course|
+        .col-4
+          = render 'courses/course', course: course

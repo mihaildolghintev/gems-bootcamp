@@ -1,0 +1,15 @@
+%h3
+  .text-center.m-3
+    Activity
+    .badge.bg-danger
+      = @activities.count
+
+- @activities.each do |activity|
+  %ul.list-group
+    %li.list-group-item= activity.id
+    %li.list-group-item= activity.trackable_type
+    %li.list-group-item= activity.trackable_id
+    %li.list-group-item= link_to activity.trackable, activity.trackable
+    %li.list-group-item= activity.key
+    %li.list-group-item= activity.parameters
+    %li.list-group-item= activity.owner

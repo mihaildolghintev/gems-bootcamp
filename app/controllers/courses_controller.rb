@@ -3,11 +3,8 @@ class CoursesController < ApplicationController
 
   # GET /courses or /courses.json
   def index
-    @courses = if params[:title]
-                 Course.where('title ILIKE ?', "%#{params[:title]}%")
-               else
-                 Course.order created_at: :desc
-               end
+    @ransack_courses = Course.ransack(params[:courses_search], search_key: :courses_search)
+    @courses = @ransack_courses.result.includes(:user)
   end
 
   # GET /courses/1 or /courses/1.json

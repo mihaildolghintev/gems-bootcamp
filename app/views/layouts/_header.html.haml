@@ -18,12 +18,16 @@
             .fa.fa-user
             Users
         %li.nav-item
+          = link_to home_activity_path, class: "nav-link #{'active' if current_page?(home_activity_path)}" do
+            .fa.fa-bell
+            Activity
+        %li.nav-item
           = link_to new_course_path, class: "nav-link #{'active' if current_page?(new_course_path)}" do
             .fa.fa-plus
             New Course
       %form.d-flex
-        = form_tag(courses_path, method: :get) do
-          = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: 'Search', class: 'form-control me-2'
+        = search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f|
+          = f.search_field :title_cont, class: 'form-control me-2'
         %ul.navbar-nav
           %li.nav-item.dropdown
             %a.nav-link.dropdown-toggle#navbar-dropdown{ 'aria-expanded' => 'false', 'data-bs-toggle' => 'dropdown', href: '#', role: 'button' }

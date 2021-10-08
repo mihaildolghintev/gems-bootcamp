@@ -30,6 +30,9 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise'
 gem 'faker'
 gem 'friendly_id'
+gem 'public_activity'
+gem 'ransack'
+gem 'rolify'
 gem 'simple_form'
 
 # Reduces boot times through caching; required in config/boot.rb

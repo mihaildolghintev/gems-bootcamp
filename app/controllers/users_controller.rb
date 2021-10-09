@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[edit update]
+  before_action :set_user, only: %i[show edit update]
 
   def index
     @q = User.ransack(params[:q])
@@ -19,10 +19,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def show; end
+
   private
 
   def set_user
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
   end
 
   def user_params

@@ -5,6 +5,6 @@ class HomeController < ApplicationController
   end
 
   def activity
-    @activities = PublicActivity::Activity.all
+    @activities = PublicActivity::Activity.order created_at: :desc
   end
 end

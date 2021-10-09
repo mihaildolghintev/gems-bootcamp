@@ -2,7 +2,11 @@
 \/
 = link_to @course.title, course_path(@course)
 
-.mt-5
-  = render 'courses/course', course: @course
+.row.mt-5
+  .col
+    = render 'courses/course', course: @course
+  .col
+    = link_to 'Add lesson', new_lesson_path(course_id: @course.id)
 
-%p#notice= notice
+    - @lessons.each do |lesson|
+      = render 'lessons/lesson', lesson: lesson

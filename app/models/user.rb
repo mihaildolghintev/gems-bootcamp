@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  extend FriendlyId
   rolify
 
   has_many :courses
@@ -9,6 +10,8 @@ class User < ApplicationRecord
   after_create :assign_default_role
 
   validate :must_have_a_role, on: :update
+
+  friendly_id :email, use: :slugged
 
   def to_s
     username
@@ -27,6 +30,10 @@ class User < ApplicationRecord
       add_role(:student)
       add_role(:teacher)
     end
+  end
+
+  def online?
+    updated_at > 10.minutes.ago
   end
 
   private

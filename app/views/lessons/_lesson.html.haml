@@ -1,0 +1,14 @@
+.card
+  .card-header
+    = link_to lesson.title, lesson
+  - if policy(lesson).show?
+    .card-body
+      = lesson.content
+      = lesson.course
+  - if policy(lesson).edit?
+    .card-footer
+      = link_to 'Edit', edit_lesson_path(lesson), class: 'btn btn-secondary'
+      = link_to 'Destory', lesson,
+        method: :delete,
+        data: { confirm: 'Are you sure?' },
+        class: 'btn btn-danger'
